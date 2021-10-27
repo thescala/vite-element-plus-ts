@@ -29,7 +29,7 @@ export default defineConfig({
     }
   },
 
-  base: '/docs/',
+  base: './',
   // 解决 使用process is not defined 的问题 history:createWebHistory(process.env.BASE_URL),
   define: { 'process.env': {} },
   // 配置前端服务地址和端口
