@@ -1,7 +1,5 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
 // @ts-ignore
-import HelloWorld from '@/components/HelloWorld.vue'
-// @ts-ignore
 import Layout from '@/layout/Layout.vue'
 const routes:Array<RouteRecordRaw> = [
   {

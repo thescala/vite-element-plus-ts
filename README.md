@@ -68,7 +68,7 @@ export default defineConfig({
 
 或者
 
-```
+```js
 alias: [
       {
         // '~/': `${path.resolve(__dirname, 'src')}/`
@@ -232,7 +232,7 @@ element-plus 配置参考：https://element-plus.gitee.io/zh-CN/guide/quickstart
 csdn 需要关注博主解决办法：
 在 style 中添加下面两行代码
 
-```
+```css
 /* 不登录阅读全文 */
 .article_content{height:auto!important}
 .hide-article-box{display:none!important}
@@ -274,4 +274,36 @@ export default defineConfig({
   define: { 'process.env': {} }
   // ...
 })
+```
+
+## 创建 http 服务器
+
+```js
+const http = require('http')
+const url = require('url')
+const path = require('path')
+const fs = require('fs')
+
+// 2. 利用path解析当前目录，然后拼接dist目录，使得服务器当前的根目录变为dist
+const root = path.join(path.resolve(process.argv[2] || '.'), 'dist')
+// 3. 创建http服务器
+const server = http.createServer((req, res) => {
+  // 4. 解析请求url获取文件路径
+  const pathname = url.parse(req.url).pathname
+  const filepath = path.join(root, pathname)
+  // 5. 使用fs文件系统模块读取index.html文件并返回给前端
+  fs.stat(filepath, (err, stats) => {
+    if (!err && stats.isFile()) {
+      // 响应头设为200
+      // res.writeHead(200, { 'Content-Type': 'text/html' })
+      res.writeHead(200)
+      fs.createReadStream(filepath).pipe(res)
+    } else {
+      res.writeHead(404)
+      res.end('404 not found')
+    }
+  })
+})
+// 6. 服务器监听8080端口
+server.listen(8080)
 ```

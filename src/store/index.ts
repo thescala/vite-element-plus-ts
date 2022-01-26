@@ -1,5 +1,6 @@
 import { InjectionKey } from 'vue'
 import { createStore,useStore as baseUseStore,Store } from 'vuex'
+// @ts-ignore
 import  { TabType } from '@/store/type/TabType'
 export interface State{
   collapse: boolean,

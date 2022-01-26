@@ -8,7 +8,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['express']
+    exclude: ['express', 'vue-demi', '@vite/client', '@vite/env']
   },
   build: {
     outDir: 'docs',
